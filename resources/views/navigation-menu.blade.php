@@ -17,7 +17,7 @@
                     </x-jet-nav-link>
 
                     @if(auth()->user()->hasRole('user'))
-                        <x-jet-nav-link href="{{ route('users.user.edit', auth()->user()->id) }}" :active="request()->routeIs('users.user.show')">
+                        <x-jet-nav-link href="{{ route('users.user.edit', auth()->user()->id) }}" :active="request()->routeIs('users.user.edit')">
                             {{ __('My Profile') }}
                         </x-jet-nav-link>
 
@@ -27,19 +27,19 @@
                     @endif
 
                     @if(auth()->user()->hasRole('administrator'))
-                        <x-jet-nav-link href="{{ route('admins.user.show', auth()->user()) }}" :active="request()->routeIs('admin.users.index')">
+                        <x-jet-nav-link href="{{ route('admins.user.edit', auth()->user()->id) }}" :active="request()->routeIs('admins.user.edit')">
                             {{ __('My Profile') }}
                         </x-jet-nav-link>
 
-                        <x-jet-nav-link href="{{ route('admins.company.show', auth()->user()->company_id) }}" :active="request()->routeIs('admin.users.index')">
+                        <x-jet-nav-link href="{{ route('admins.company.show', auth()->user()->company_id) }}" :active="request()->routeIs('admins.company.show')">
                             {{ __('Company Profile') }}
                         </x-jet-nav-link>
 
-                        <x-jet-nav-link href="{{ route('admins.company.index') }}" :active="request()->routeIs('admin.users.index')">
+                        <x-jet-nav-link href="{{ route('admins.company.index') }}" :active="request()->routeIs('admins.company.index')">
                             {{ __('Companies list') }}
                         </x-jet-nav-link>
 
-                        <x-jet-nav-link href="{{ route('admins.user.index') }}" :active="request()->routeIs('admin.users.index')">
+                        <x-jet-nav-link href="{{ route('admins.user.index') }}" :active="request()->routeIs('admins.user.index')">
                             {{ __('Users List') }}
                         </x-jet-nav-link>
 
