@@ -18,6 +18,8 @@ class AdminController extends Controller
     public function index()
     {
         $users = User::paginate(10);
+        //I AM NOT SHOW IN THIS CASE ADMINISTRATOR CAN SEE AND MODIFY SUPER ADMINISTRATOR PROFILE MAYBE BE BETTER TO ELEMENT SUPER ADMIN FROM LIST
+        //$USER = USER::WHERE('ROLE_NAME', '<>', 'Superadministrator')->paginate(10);
         return View::make('Admin.user.index', compact('users'));
     }
 
