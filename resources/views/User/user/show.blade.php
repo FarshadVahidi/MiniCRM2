@@ -8,7 +8,6 @@
     @section('mainContent')
         <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
             <h3>User Info</h3>
-            {{ $user }}
         </div>
     @endsection
 </x-app-layout>

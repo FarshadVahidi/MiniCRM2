@@ -21,13 +21,13 @@
                             {{ __('My Profile') }}
                         </x-jet-nav-link>
 
-                        <x-jet-nav-link href="{{ route('users.company.index') }}" :active="request()->routeIs('admin.users.index')">
+                        <x-jet-nav-link href="{{ route('users.company.show', auth()->user()->id) }}" :active="request()->routeIs('users.company.show')">
                             {{ __('Company Profile') }}
                         </x-jet-nav-link>
                     @endif
 
                     @if(auth()->user()->hasRole('administrator'))
-                        <x-jet-nav-link href="{{ route('admins.user.show', auth()->user()->id) }}" :active="request()->routeIs('admin.users.index')">
+                        <x-jet-nav-link href="{{ route('admins.user.show', auth()->user()) }}" :active="request()->routeIs('admin.users.index')">
                             {{ __('My Profile') }}
                         </x-jet-nav-link>
 
