@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
 class CompanyController extends Controller
@@ -17,7 +18,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return View::make('Admin.company.index');
+        $companies = Company::paginate(10);
+        return View::make('Admin.company.index', ['companies' => $companies]);
     }
 
     /**
@@ -62,8 +64,9 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit(Company $company)
+    public function edit($id)
     {
+        $company = Company::findOrFail($id);
         return View::make('Admin.company.edit', compact('company'));
     }
 
@@ -72,11 +75,15 @@ class CompanyController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Company $company)
     {
-        //
+        $company->update($this->validateRequest());
+        $this->storeImage($company);
+
+        Session::flash('message', 'Company Successfully Update.');
+        return View::make('Admin.company.index');
     }
 
     /**
@@ -88,5 +95,33 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function validateRequest()
+    {
+        return tap(request()->validate([
+            'name'  => 'required|string|min:3|max:255',
+            'email' => 'required|email',
+            'website'   => ['required', 'regex:/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i'],
+            ]), function (){
+            if(request()->hasFile('photo')){
+                if(request()->hasFile('photo')){
+                    request()->validate([
+                        'photo' => 'file|image|max:5000'
+                    ]);
+                }
+            }
+        });
+    }
+
+    //STILL THE SAME ERROR!!!
+    private function storeImage($company)
+    {
+        if(request()->hasFile('photo'))
+        {
+            $company->update([
+                'photo'  => request()->photo->store('uploads', 'public'),
+            ]);
+        }
     }
 }
