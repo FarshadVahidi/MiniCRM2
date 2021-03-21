@@ -4,17 +4,18 @@ namespace App\Http\Controllers\Super;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
-class superController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        //
+        return View::make('Super.company.index');
     }
 
     /**
@@ -42,11 +43,11 @@ class superController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($id)
     {
-        //
+        return View::make('Super.company.show');
     }
 
     /**

@@ -33,6 +33,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('company', App\Http\Controllers\Admin\CompanyController::class);
     });
 
+    Route::group(['middleware' => 'role:superadministrator', 'prefix' => 'super', 'as' => 'supers.'], function(){
+        Route::resource('user', App\Http\Controllers\Super\SuperController::class);
+        Route::resource('company' , App\Http\Controllers\Super\CompanyController::class);
+    });
+
 
     Route::get('/clear-all-cache', function () {
         Artisan::call('cache:clear');
