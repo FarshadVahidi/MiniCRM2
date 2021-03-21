@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -47,18 +48,21 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        return View::make('Admin.user.show');
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
-        //
+        if(auth()->user()->id != $id)
+            abort(403);
+        $user = User::findOrFail($id);
+        return View::make('Admin.user.edit', compact('user'));
     }
 
     /**
