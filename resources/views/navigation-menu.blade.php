@@ -17,7 +17,7 @@
                     </x-jet-nav-link>
 
                     @if(auth()->user()->hasRole('user'))
-                        <x-jet-nav-link href="{{ route('users.user.index') }}" :active="request()->routeIs('admin.users.index')">
+                        <x-jet-nav-link href="{{ route('users.user.edit', auth()->user()) }}" :active="request()->routeIs('users.user.show')">
                             {{ __('My Profile') }}
                         </x-jet-nav-link>
 

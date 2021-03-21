@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -15,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return View::make('User.user.index');
+        //
     }
 
     /**
@@ -43,22 +44,22 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return View::make('User.user.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return View::make('User.user.edit', compact('user'));
     }
 
     /**
