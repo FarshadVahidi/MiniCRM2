@@ -58,8 +58,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit(User $user)
+    public function edit($id)
     {
+        if(auth()->user()->id != $id)
+            abort(403);
+        $user = User::findOrFail($id);
         return View::make('User.user.edit', compact('user'));
     }
 
