@@ -31,7 +31,7 @@
                             {{ __('My Profile') }}
                         </x-jet-nav-link>
 
-                        <x-jet-nav-link href="{{ route('admins.company.show', auth()->user()->id) }}" :active="request()->routeIs('admins.company.show')">
+                        <x-jet-nav-link href="{{ route('admins.company.show', auth()->user()->company_id) }}" :active="request()->routeIs('admins.company.show')">
                             {{ __('Company Profile') }}
                         </x-jet-nav-link>
 

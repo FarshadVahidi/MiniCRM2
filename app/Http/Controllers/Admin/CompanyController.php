@@ -51,10 +51,7 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        if(auth()->user()->id != $id)
-            abort(403); // MAYBE BETTER TO HAVE SEND NOTIFICATION TO SUPER ADMINISTRATOR FOR THIS REQUEST
-        $user = User::findOrFail($id);
-        $company = Company::findOrFail($user->company_id);
+        $company = Company::findOrFail($id);
         return View::make('Admin.company.show', compact('company'));
     }
 
@@ -64,9 +61,9 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit($id)
+    public function edit(Company $company)
     {
-        $company = Company::findOrFail($id);
+//        $company = Company::findOrFail($id);
         return View::make('Admin.company.edit', compact('company'));
     }
 

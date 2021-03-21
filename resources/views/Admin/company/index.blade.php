@@ -27,7 +27,7 @@
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                                     <div>
-                                        <p><a class="btn btn-primary" href="{{ route('admins.company.show', ['company' => $company]) }}">{{ __('Show') }}</a></p>
+                                        <p><a class="btn btn-primary" href="{{ route('admins.company.show', $company->id) }}">{{ __('Show') }}</a></p>
                                     </div>
                                     <div>
                                         <p><a class="btn btn-success" href="{{ route('admins.company.edit', ['company' => $company]) }}">{{ __('Edit') }}</a></p>
