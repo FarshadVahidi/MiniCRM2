@@ -23,6 +23,7 @@
                     <p><strong>{{ __('Last Name: ') }}</strong> {{ $user->lastName }}</p>
                     <p><strong>{{ __('Work For: ') }}</strong> {{ $user->company_name }}</p>
                     <p><strong>{{ __('Email: ') }}</strong> {{ $user->email }}</p>
+                    <p><strong>{{ __('Phone: ') }}</strong> {{ $user->phone }}</p>
                 </div>
             </div>
 

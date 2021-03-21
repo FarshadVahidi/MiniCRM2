@@ -59,11 +59,11 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        if(auth()->user()->id != $id)
-            abort(403);
-        $user = User::findOrFail($id);
+//        if(auth()->user()->id != $id)
+//            abort(403);
+//        $user = User::findOrFail($id);
         return View::make('Admin.user.edit', compact('user'));
     }
 
@@ -80,7 +80,7 @@ class AdminController extends Controller
         $this->storeImage($user);
 
         Session::flash('message', 'Your Data Successfully Updated');
-        return View::make('Admin.user.index');
+        return View::make('Admin.index');
     }
 
     /**
