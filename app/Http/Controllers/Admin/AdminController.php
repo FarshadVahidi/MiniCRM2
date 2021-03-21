@@ -17,7 +17,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return View::make('Admin.user.index');
+        $users = User::paginate(10);
+        return View::make('Admin.user.index', compact('users'));
     }
 
     /**
@@ -47,9 +48,9 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\View\View
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return View::make('Admin.user.show', compact('user'));
     }
 
     /**

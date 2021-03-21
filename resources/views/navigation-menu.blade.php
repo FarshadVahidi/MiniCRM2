@@ -39,7 +39,7 @@
                             {{ __('Companies list') }}
                         </x-jet-nav-link>
 
-                        <x-jet-nav-link href="{{ route('admins.user.index') }}" :active="request()->routeIs('admin.users.index')">
+                        <x-jet-nav-link href="{{ route('admins.user.index') }}" :active="request()->routeIs('admins.user.index')">
                             {{ __('Users List') }}
                         </x-jet-nav-link>
 
