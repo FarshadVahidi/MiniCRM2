@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\User\CompanyController;
-use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,7 +24,21 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => 'role:user', 'prefix' => 'user', 'as'=> 'users.'], function(){
-        Route::resource('user', UserController::class);
-        Route::resource('company', CompanyController::class);
+        Route::resource('user', App\Http\Controllers\User\UserController::class);
+        Route::resource('company', App\Http\Controllers\User\CompanyController::class);
+    });
+
+    Route::group(['middleware' => 'role:administrator', 'prefix' => 'admin', 'as' => 'admins.'], function(){
+        Route::resource('user', App\Http\Controllers\Admin\AdminController::class);
+        Route::resource('company', App\Http\Controllers\Admin\CompanyController::class);
+    });
+
+
+    Route::get('/clear-all-cache', function () {
+        Artisan::call('cache:clear');
+        \Illuminate\Support\Facades\Artisan::call('route:clear');
+        \Illuminate\Support\Facades\Artisan::call('view:clear');
+        \Illuminate\Support\Facades\Artisan::call('config:clear');
+        echo "Cleared all caches successfully.";
     });
 });

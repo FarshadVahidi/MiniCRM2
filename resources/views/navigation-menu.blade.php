@@ -25,6 +25,25 @@
                             {{ __('Company Profile') }}
                         </x-jet-nav-link>
                     @endif
+
+                    @if(auth()->user()->hasRole('administrator'))
+                        <x-jet-nav-link href="{{ route('admins.user.show', auth()->user()->id) }}" :active="request()->routeIs('admin.users.index')">
+                            {{ __('My Profile') }}
+                        </x-jet-nav-link>
+
+                        <x-jet-nav-link href="{{ route('admins.company.show', auth()->user()->company_id) }}" :active="request()->routeIs('admin.users.index')">
+                            {{ __('Company Profile') }}
+                        </x-jet-nav-link>
+
+                        <x-jet-nav-link href="{{ route('admins.company.index') }}" :active="request()->routeIs('admin.users.index')">
+                            {{ __('Companies list') }}
+                        </x-jet-nav-link>
+
+                        <x-jet-nav-link href="{{ route('admins.user.index') }}" :active="request()->routeIs('admin.users.index')">
+                            {{ __('Users List') }}
+                        </x-jet-nav-link>
+
+                    @endif
                 </div>
             </div>
 
