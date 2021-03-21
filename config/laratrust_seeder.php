@@ -13,16 +13,17 @@ return [
 
     'roles_structure' => [
         'superadministrator' => [
-            'users' => 'c,r,u,d',
-            'payments' => 'c,r,u,d',
-            'profile' => 'r,u'
+            'users'     => 'c,r,u,d',
+            'companies' => 'c,r,u,d',
+            'profile'   => 'r,u'
         ],
         'administrator' => [
-            'users' => 'c,r,u,d',
-            'profile' => 'r,u'
+            'users'     => 'c,r,u,d',
+            'company'   => 'c,r,u'
         ],
         'user' => [
-            'profile' => 'r,u',
+            'users'     => 'r,u',
+            'companies' => 'r',
         ],
         'role_name' => [
             'module_1_name' => 'c,r,u,d',
