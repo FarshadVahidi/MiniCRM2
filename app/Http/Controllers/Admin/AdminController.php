@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
 class AdminController extends Controller
@@ -70,11 +71,15 @@ class AdminController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $user->update($this->validateRequest());
+        $this->storeImage($user);
+
+        Session::flash('message', 'Your Data Successfully Updated');
+        return View::make('Admin.user.index');
     }
 
     /**
@@ -86,5 +91,33 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function validateRequest()
+    {
+        return tap(request()->validate([
+            'name'      =>  'required|string|min:3|max:255',
+            'lastName'  =>  'required|string|min:3|max:255',
+            'email'     =>  'required|email',
+            'phone'     =>  'required|string'
+        ]), function(){
+            if(request()->hasFile('photo'))
+            {
+                request()->validate([
+                    'photo' => 'file|image|max:5000'
+                ]);
+            }
+        });
+    }
+
+    //I CAN NOT UNDERSTAND THIS SHOULD WORK PROPERLY BUT IN DATABASE ADD PREFIX UPLOADS/... TO MY IMGE NAME AND IN SHOW.BLADE I CAN NOT SEE IT
+    private function storeImage($user)
+    {
+        if(request()->hasFile('photo'))
+        {
+            $user->update([
+                'photo' => request()->photo->store('uploads', 'public'),
+            ]);
+        }
     }
 }

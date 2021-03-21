@@ -11,7 +11,7 @@
                 <h3>User Info</h3>
             </div>
 
-            <form class="row g-3" action="{{ route('users.user.update', $user->id)}}" method="POST" enctype="multipart/form-data">
+            <form class="row g-3" action="{{ route('admins.user.update', $user->id)}}" method="POST" enctype="multipart/form-data">
                 @method('PATCH')
                 <div class="col-md-6">
                     <label for="name" class="form-label">{{ __('First Name') }}</label>
