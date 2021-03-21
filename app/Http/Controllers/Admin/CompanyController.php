@@ -83,7 +83,7 @@ class CompanyController extends Controller
         $this->storeImage($company);
 
         Session::flash('message', 'Company Successfully Update.');
-        return View::make('Admin.company.index');
+        return View::make('Admin.index');
     }
 
     /**
