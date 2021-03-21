@@ -11,26 +11,26 @@
                 <h3>User Info</h3>
             </div>
 
-            <form class="row g-3" action="{{ route('users.user.edit', $user)}}" enctype="multipart/form-data">
+            <form class="row g-3" action="{{ route('users.user.update', $user->id)}}" method="POST" enctype="multipart/form-data">
                 @method('PATCH')
                 <div class="col-md-6">
                     <label for="name" class="form-label">{{ __('First Name') }}</label>
-                    <input type="text" class="form-control" id="name" required value="{{ old('name') ?? $user->name }}">
+                    <input type="text" class="form-control" name="name" required="required" value="{{ old('name') ?? $user->name }}">
                     <div>{{ $errors->first('name') }}</div>
                 </div>
                 <div class="col-md-6">
                     <label for="lastName" class="form-label">{{ __('Last Name') }}</label>
-                    <input type="text" class="form-control" id="lastName" required value="{{ old('lastName') ?? $user->lastName }}">
+                    <input type="text" class="form-control" name="lastName" required="required" value="{{ old('lastName') ?? $user->lastName }}">
                     <div>{{ $errors->first('lastName') }}</div>
                 </div>
                 <div class="col-md-6">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" required value="{{ old('email') ?? $user->email }}">
+                    <input type="email" class="form-control" name="email" required="required" value="{{ old('email') ?? $user->email }}">
                     <div>{{ $errors->first('email') }}</div>
                 </div>
                 <div class="col-md-6">
                     <label for="phone" class="form-label">{{ __('Phone') }}</label>
-                    <input type="text" class="form-control" id="phone" required value="{{ old('phone') ?? $user->phone }}">
+                    <input type="text" class="form-control" name="phone" required="required" value="{{ old('phone') ?? $user->phone }}">
                     <div>{{ $errors->first('phone') }}</div>
                 </div>
 
@@ -45,6 +45,8 @@
                     <input type="file" name="photo" class="py-2" value="{{ old('photo') ?? $user->photo }}">
                     <div>{{ $errors->first('photo') }}</div>
                 </div>
+
+                @csrf
 
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
