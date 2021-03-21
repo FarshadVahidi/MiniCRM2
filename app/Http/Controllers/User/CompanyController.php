@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -43,11 +45,16 @@ class CompanyController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($id)
     {
-        //
+        $coId = auth()->user()->company_id;
+        if($coId != $id)
+            abort(403); // MAYBE BETTER TO HAVE SEND NOTIFICATION TO SUPER ADMINISTRATOR FOR THIS REQUEST
+
+        $company = Company::findOrFail($coId);
+        return View::make('User.company.show', compact('company'));
     }
 
     /**
